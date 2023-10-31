@@ -9,10 +9,41 @@ color_white = (255, 255, 255)
 color_black = (0, 0, 0)
 #andreas anbefaler manuelt map (manuel array hvor der er forskelligt terrain)
 def draw_grid():
+    # hardcodded grid :)
+    grid = [
+        [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 1, 1],
+        [0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [2, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ]
+
     for row in range(Rows):
         for col in range(Cols):
+            if grid[row][col] == 0:
+                color = (0, 255, 0)  # Green for 0
+            elif grid[row][col] == 1:
+                color = (128, 128, 128)  # Gray for 1
+            elif grid[row][col] == 2:
+                color = (41, 141, 255)  # Blue for 2
             rect = pygame.Rect(col * Tile_Size, row * Tile_Size, Tile_Size, Tile_Size)
-            pygame.draw.rect(screen, color_black, rect, width=1)
+            pygame.draw.rect(screen, color, rect)
+
 #manuelt map Procedural Generation
 def cost_grid():
     box_list = []
@@ -35,7 +66,7 @@ def Gen_Goal_Rect(goal_positions):
         for col in range(Cols):
             if goal_positions[row][col] == 1:
                 rect = pygame.Rect(col * Tile_Size, row * Tile_Size, Tile_Size, Tile_Size)
-                pygame.draw.rect(screen, (0, 255, 0), rect)
+                pygame.draw.rect(screen, (255, 165, 0), rect)
 
 def gen_startpos():
     start_pos = (random.randint(0, Rows-1), random.randint(0, Cols-1))
